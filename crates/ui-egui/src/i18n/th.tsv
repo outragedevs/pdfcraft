@@ -2725,3 +2725,4 @@ theme	Appearance	ลักษณะที่ปรากฏ
 	This page has an opaque background of its own, so the background is blended with its content.	หน้านี้มีพื้นหลังทึบของตัวเอง จึงผสมพื้นหลังเข้ากับเนื้อหาของหน้า
 	This page has an opaque background of its own, which hides anything behind it. Choose Blend with page content.	หน้านี้มีพื้นหลังทึบของตัวเองซึ่งบังทุกอย่างที่อยู่ด้านหลัง เลือก ผสมกับเนื้อหาของหน้า
 	Behind text and images	ด้านหลังข้อความและรูปภาพ
+	This page has an opaque background of its own, which hides the image behind it.	หน้านี้มีพื้นหลังทึบของตัวเองซึ่งบังรูปภาพที่อยู่ด้านหลัง

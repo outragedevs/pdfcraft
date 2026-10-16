@@ -2832,3 +2832,4 @@ theme	Appearance	Teema
 	This page has an opaque background of its own, so the background is blended with its content.	Tällä sivulla on oma peittävä tausta, joten tausta sekoitetaan sen sisältöön.
 	This page has an opaque background of its own, which hides anything behind it. Choose Blend with page content.	Tällä sivulla on oma peittävä tausta, joka peittää kaiken sen alla olevan. Valitse Sekoita sivun sisältöön.
 	Behind text and images	Tekstin ja kuvien takana
+	This page has an opaque background of its own, which hides the image behind it.	Tällä sivulla on oma peittävä tausta, joka peittää sen alla olevan kuvan.

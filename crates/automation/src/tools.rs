@@ -585,7 +585,7 @@ pub fn tools() -> Vec<ToolDef> {
             }),
             &["doc"],
         )),
-        t("content_list", "List added content", "Text and images added with page_add_text/page_add_image (or Edit a PDF ▸ Add content), per page with a 1-based index, rect (points from the top-left of the page), and text style.")
+        t("content_list", "List added content", "Text and images added with page_add_text/page_add_image (or Edit a PDF ▸ Add content), per page with a 1-based index, rect (points from the top-left of the page), and text style; images say whether they are behind the page content.")
             .ro()
             .with(schema(json!({ "doc": doc() }), &["doc"])),
         t(
@@ -610,14 +610,14 @@ pub fn tools() -> Vec<ToolDef> {
         t(
             "page_add_image",
             "Add an image to a page",
-            "Add an image file (PNG, JPEG, TIFF, GIF, BMP) as page content: in rect (points from the top-left of the page), or centred at its natural size (shrunk to fit). Undoable; movable with content_update.",
+            "Add an image file (PNG, JPEG, TIFF, GIF, BMP) as page content: in rect (points from the top-left of the page), or centred at its natural size (shrunk to fit). behind: under the page's own text and images (above a recognised white page fill and over backgrounds; otherwise behind the whole page, where an opaque page hides it) instead of on top. Undoable; movable with content_update.",
         )
         .cmd("edit.image")
         .with(schema(
-            json!({ "doc": doc(), "page": { "type": "integer", "minimum": 1 }, "path": { "type": "string" }, "rect": { "type": "array", "items": { "type": "number" }, "minItems": 4, "maxItems": 4 } }),
+            json!({ "doc": doc(), "page": { "type": "integer", "minimum": 1 }, "path": { "type": "string" }, "rect": { "type": "array", "items": { "type": "number" }, "minItems": 4, "maxItems": 4 }, "behind": { "type": "boolean" } }),
             &["doc", "page", "path"],
         )),
-        t("content_update", "Edit added content", "Move/resize (rect), retype (text) or restyle (font, size, bold, italic, color, align, char_spacing in points) an added item (page, index from content_list). Images: rotate (degrees, multiple of 90, counter-clockwise), flip_h / flip_v (toggle), crop [left, bottom, right, top] as fractions trimmed, image (a file that replaces the picture). Undoable.")
+        t("content_update", "Edit added content", "Move/resize (rect), retype (text) or restyle (font, size, bold, italic, color, align, char_spacing in points) an added item (page, index from content_list). Images: rotate (degrees, multiple of 90, counter-clockwise), flip_h / flip_v (toggle), crop [left, bottom, right, top] as fractions trimmed, image (a file that replaces the picture), behind (true: under the page's text and images, false: on top; this changes the item's index). Undoable.")
             .with(schema(
                 json!({
                     "doc": doc(), "page": { "type": "integer", "minimum": 1 }, "index": { "type": "integer", "minimum": 1 },
@@ -629,6 +629,7 @@ pub fn tools() -> Vec<ToolDef> {
                     "rotate": { "type": "integer" }, "flip_h": { "type": "boolean" }, "flip_v": { "type": "boolean" },
                     "crop": { "type": "array", "items": { "type": "number", "minimum": 0, "maximum": 0.95 }, "minItems": 4, "maxItems": 4, "description": "Fractions trimmed: left, bottom, right, top. Left and right together, and bottom and top together, trim at most 0.95." },
                     "image": { "type": "string", "description": "Replace the picture with this file." },
+                    "behind": { "type": "boolean", "description": "Images: under the page's own text and images (true) or on top (false)." },
                 }),
                 &["doc", "page", "index"],
             )),
